@@ -14,6 +14,8 @@
   "license": "ISC",
   "dependencies": {
     "midi": "^2.0.0",
-    "osc": "^2.4.5"
+    "osc": "^2.4.5",
+    "ramda": "^0.30.1",
+    "redux": "^5.0.1"
   }
 }
