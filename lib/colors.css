@@ -1,51 +1,574 @@
-//Velocity to RGB Color Chart
-//Color Velocity Color Velocity Color Velocity
-#000000 0 #142B00 19 #004152 38
-#1E1E1E 1 #4CFF4C 20 #001019 39
-#7F7F7F 2 #00FF00 21 #4C88FF 40
-#FFFFFF 3 #005900 22 #0055FF 41
-#FF4C4C 4 #001900 23 #001D59 42
-#FF0000 5 #4CFF5E 24 #000819 43
-#590000 6 #00FF19 25 #4C4CFF 44
-#190000 7 #00590D 26 #0000FF 45
-#FFBD6C 8 #001902 27 #000059 46
-#FF5400 9 #4CFF88 28 #000019 47
-#591D00 10 #00FF55 29 #874CFF 48
-#271B00 11 #00591D 30 #5400FF 49
-#FFFF4C 12 #001F12 31 #190064 50
-#FFFF00 13 #4CFFB7 32 #0F0030 51
-#595900 14 #00FF99 33 #FF4CFF 52
-#191900 15 #005935 34 #FF00FF 53
-#88FF4C 16 #001912 35 #590059 54
-#54FF00 17 #4CC3FF 36 #190019 55
-#1D5900 18 #00A9FF 37 #FF4C87 56
-5
-Color Velocity Color Velocity Color Velocity
-#FF0054 57 #88E106 85 #DCFF6B 113
-#59001D 58 #72FF15 86 #80FFBD 114
-#220013 59 #00FF00 87 #9A99FF 115
-#FF1500 60 #3BFF26 88 #8E66FF 116
-#993500 61 #59FF71 89 #404040 117
-#795100 62 #38FFCC 90 #757575 118
-#436400 63 #5B8AFF 91 #E0FFFF 119
-#033900 64 #3151C6 92 #A00000 120
-#005735 65 #877FE9 93 #350000 121
-#00547F 66 #D31DFF 94 #1AD000 122
-#0000FF 67 #FF005D 95 #074200 123
-#00454F 68 #FF7F00 96 #B9B000 124
-#2500CC 69 #B9B000 97 #3F3100 125
-#7F7F7F 70 #90FF00 98 #B35F00 126
-#202020 71 #835D07 99 #4B1502 127
-#FF0000 72 #392b00 100 #404040 117
-#BDFF2D 73 #144C10 101 #757575 118
-#AFED06 74 #0D5038 102 #E0FFFF 119
-#64FF09 75 #15152A 103 #A00000 120
-#108B00 76 #16205A 104 #350000 121
-#00FF87 77 #693C1C 105 #1AD000 122
-#00A9FF 78 #A8000A 106 #074200 123
-#002AFF 79 #DE513D 107 #B9B000 124
-#3F00FF 80 #D86A1C 108 #3F3100 125
-#7A00FF 81 #FFE126 109 #B35F00 126
-#B21A7D 82 #9EE12F 110 #4B1502 127
-#402100 83 #67B50F 111
-#FF4A00 84 #1E1E30 112
+/* //Velocity to RGB Color Chart */
+/* //Color Velocity Color Velocity Color Velocity */
+.trackbtn, .softkey {
+    width: 32px;
+    height: 32px;
+    align-self: center;
+    justify-self: center;
+}
+[data-note="64"]:before {
+    content: 'up';
+}
+[data-note="65"]:before {
+    content: 'v';
+}
+[data-note="66"]:before {
+    content: '<';
+}
+[data-note="67"]:before {
+    content: '>';
+}
+[data-note="68"]:after {
+    content: 'vol';
+}
+[data-note="69"]:after {
+    content: 'pan';
+}
+[data-note="70"]:after {
+    content: 'send';
+}
+[data-note="71"]:after {
+    content: 'device';
+}
+.trackbtn {
+    position: relative
+}
+.trackbtn:after {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    left: 0;
+    top: calc(100% + 5px);
+}
+
+.pad {
+    /* transition: background-color 32ms; */
+    border-radius: 2px;
+}
+
+.pad:focus, .pad:hover {
+    box-shadow: 0 0 0px 4px black;
+}
+.pad[data-ledmode="0x90"] {
+    opacity: 0.1;
+}
+.pad[data-ledmode="0x91"] {
+    opacity: 0.25;
+}
+.pad[data-ledmode="0x92"] {
+    opacity: 0.5;
+}
+.pad[data-ledmode="0x93"] {
+    opacity: 0.65;
+}
+.pad[data-ledmode="0x94"] {
+    opacity: 0.75;
+}
+.pad[data-ledmode="0x95"] {
+    opacity: 0.9;
+}
+.pad[data-ledmode="0x96"]  {
+    opacity: 1;
+}
+
+  /* LED_PULSING_16 = 0x97, */
+  /* LED_PULSING_8 = 0x98, */
+  /* LED_PULSING_4 = 0x99, */
+  /* LED_PULSING_2 = 0x9a, */
+  /* LED_BLINKING_24 = 0x9b, */
+  /* LED_BLINKING_16 = 0x9c, */
+  /* LED_BLINKING_8 = 0x9d, */
+  /* LED_BLINKING_4 = 0x9e, */
+  /* LED_BLINKING_2 = 0x9f; */
+
+.pad[data-color="0"] {
+    background-color: #000000;
+}
+.pad[data-color="19"] {
+    background-color: #142B00;
+}
+.pad[data-color="38"] {
+    background-color: #004152;
+}
+.pad[data-color="1"] {
+    background-color: #1E1E1E;
+}
+.pad[data-color="20"] {
+    background-color: #4CFF4C;
+}
+.pad[data-color="39"] {
+    background-color: #001019;
+}
+
+.pad[data-color="2"] {
+    background-color: #7F7F7F;
+}
+.pad[data-color="21"] {
+    background-color: #00FF00;
+}
+.pad[data-color="40"] {
+    background-color: #4C88FF;
+}
+
+.pad[data-color="3"] {
+    background-color: #FFFFFF;
+}
+.pad[data-color="22"] {
+    background-color: #005900;
+}
+.pad[data-color="41"] {
+    background-color: #0055FF;
+}
+
+.pad[data-color="4"] {
+    background-color: #FF4C4C;
+}
+.pad[data-color="23"] {
+    background-color: #001900;
+}
+.pad[data-color="42"] {
+    background-color: #001D59;
+}
+
+.pad[data-color="5"] {
+    background-color: #FF0000;
+}
+.pad[data-color="24"] {
+    background-color: #4CFF5E;
+}
+.pad[data-color="43"] {
+    background-color: #000819;
+}
+
+.pad[data-color="6"] {
+    background-color: #590000;
+}
+.pad[data-color="25"] {
+    background-color: #00FF19;
+}
+.pad[data-color="44"] {
+    background-color: #4C4CFF;
+}
+.pad[data-color="7"] {
+    background-color: #190000;
+}
+.pad[data-color="26"] {
+    background-color: #00590D;
+}
+.pad[data-color="45"] {
+    background-color: #0000FF;
+}
+
+.pad[data-color="8"] {
+    background-color: #FFBD6C;
+}
+.pad[data-color="27"] {
+    background-color: #001902;
+}
+.pad[data-color="46"] {
+    background-color: #000059;
+}
+
+.pad[data-color="9"] {
+    background-color: #FF5400;
+}
+.pad[data-color="28"] {
+    background-color: #4CFF88;
+}
+.pad[data-color="47"] {
+    background-color: #000019;
+}
+
+.pad[data-color="10"] {
+    background-color: #591D00;
+}
+.pad[data-color="29"] {
+    background-color: #00FF55;
+}
+.pad[data-color="48"] {
+    background-color: #874CFF;
+}
+
+.pad[data-color="11"] {
+    background-color: #271B00;
+}
+.pad[data-color="30"] {
+    background-color: #00591D;
+}
+.pad[data-color="49"] {
+    background-color: #5400FF;
+}
+
+.pad[data-color="12"] {
+    background-color: #FFFF4C;
+}
+.pad[data-color="31"] {
+    background-color: #001F12;
+}
+.pad[data-color="50"] {
+    background-color: #190064;
+}
+
+.pad[data-color="13"] {
+    background-color: #FFFF00;
+}
+.pad[data-color="32"] {
+    background-color: #4CFFB7;
+}
+.pad[data-color="51"] {
+    background-color: #0F0030;
+}
+
+.pad[data-color="14"] {
+    background-color: #595900;
+}
+.pad[data-color="33"] {
+    background-color: #00FF99;
+}
+.pad[data-color="52"] {
+    background-color: #FF4CFF;
+}
+
+.pad[data-color="15"] {
+    background-color: #191900;
+}
+.pad[data-color="34"] {
+    background-color: #005935;
+}
+.pad[data-color="53"] {
+    background-color: #FF00FF;
+}
+
+.pad[data-color="16"] {
+    background-color: #88FF4C;
+}
+.pad[data-color="35"] {
+    background-color: #001912;
+}
+.pad[data-color="54"] {
+    background-color: #590059;
+}
+
+.pad[data-color="17"] {
+    background-color: #54FF00;
+}
+.pad[data-color="36"] {
+    background-color: #4CC3FF;
+}
+.pad[data-color="55"] {
+    background-color: #190019;
+}
+
+.pad[data-color="18"] {
+    background-color: #1D5900;
+}
+.pad[data-color="37"] {
+    background-color: #00A9FF;
+}
+.pad[data-color="56"] {
+    background-color: #FF4C87;
+}
+
+.pad[data-color="57"] {
+    background-color: #FF0054;
+}
+.pad[data-color="85"] {
+    background-color: #88E106;
+}
+.pad[data-color="113"] {
+    background-color: #DCFF6B;
+}
+
+.pad[data-color="58"] {
+    background-color: #59001D;
+}
+.pad[data-color="86"] {
+    background-color: #72FF15;
+}
+.pad[data-color="114"] {
+    background-color: #80FFBD;
+}
+
+.pad[data-color="59"] {
+    background-color: #220013;
+}
+.pad[data-color="87"] {
+    background-color: #00FF00;
+}
+.pad[data-color="115"] {
+    background-color: #9A99FF;
+}
+
+.pad[data-color="60"] {
+    background-color: #FF1500;
+}
+.pad[data-color="88"] {
+    background-color: #3BFF26;
+}
+.pad[data-color="116"] {
+    background-color: #8E66FF;
+}
+.pad[data-color="61"] {
+    background-color: #993500;
+}
+.pad[data-color="89"] {
+    background-color: #59FF71;
+}
+.pad[data-color="117"] {
+    background-color: #404040;
+}
+.pad[data-color="62"] {
+    background-color: #795100;
+}
+.pad[data-color="90"] {
+    background-color: #38FFCC;
+}
+.pad[data-color="118"] {
+    background-color: #757575;
+}
+.pad[data-color="63"] {
+    background-color: #436400;
+}
+.pad[data-color="91"] {
+    background-color: #5B8AFF;
+}
+.pad[data-color="119"] {
+    background-color: #E0FFFF;
+}
+.pad[data-color="64"] {
+    background-color: #033900;
+}
+.pad[data-color="92"] {
+    background-color: #3151C6;
+}
+.pad[data-color="120"] {
+    background-color: #A00000;
+}
+.pad[data-color="65"] {
+    background-color: #005735;
+}
+.pad[data-color="93"] {
+    background-color: #877FE9;
+}
+.pad[data-color="121"] {
+    background-color: #350000;
+}
+.pad[data-color="66"] {
+    background-color: #00547F;
+}
+.pad[data-color="94"] {
+    background-color: #D31DFF;
+}
+.pad[data-color="122"] {
+    background-color: #1AD000;
+}
+.pad[data-color="67"] {
+    background-color: #0000FF;
+}
+.pad[data-color="95"] {
+    background-color: #FF005D;
+}
+.pad[data-color="123"] {
+    background-color: #074200;
+}
+.pad[data-color="68"] {
+    background-color: #00454F;
+}
+.pad[data-color="96"] {
+    background-color: #FF7F00;
+}
+.pad[data-color="124"] {
+    background-color: #B9B000;
+}
+.pad[data-color="69"] {
+    background-color: #2500CC;
+}
+.pad[data-color="97"] {
+    background-color: #B9B000;
+}
+.pad[data-color="125"] {
+    background-color: #3F3100;
+}
+.pad[data-color="70"] {
+    background-color: #7F7F7F;
+}
+.pad[data-color="98"] {
+    background-color: #90FF00;
+}
+.pad[data-color="126"] {
+    background-color: #B35F00;
+}
+.pad[data-color="71"] {
+    background-color: #202020;
+}
+.pad[data-color="99"] {
+    background-color: #835D07;
+}
+.pad[data-color="127"] {
+    background-color: #4B1502;
+}
+.pad[data-color="72"] {
+    background-color: #FF0000;
+}
+.pad[data-color="100"] {
+    background-color: #392b00;
+}
+.pad[data-color="117"] {
+    background-color: #404040;
+}
+.pad[data-color="73"] {
+    background-color: #BDFF2D;
+}
+.pad[data-color="101"] {
+    background-color: #144C10;
+}
+.pad[data-color="118"] {
+    background-color: #757575;
+}
+.pad[data-color="74"] {
+    background-color: #AFED06;
+}
+.pad[data-color="102"] {
+    background-color: #0D5038;
+}
+.pad[data-color="119"] {
+    background-color: #E0FFFF;
+}
+.pad[data-color="75"] {
+    background-color: #64FF09;
+}
+.pad[data-color="103"] {
+    background-color: #15152A;
+}
+.pad[data-color="120"] {
+    background-color: #A00000;
+}
+.pad[data-color="76"] {
+    background-color: #108B00;
+}
+.pad[data-color="104"] {
+    background-color: #16205A;
+}
+.pad[data-color="121"] {
+    background-color: #350000;
+}
+.pad[data-color="77"] {
+    background-color: #00FF87;
+}
+.pad[data-color="105"] {
+    background-color: #693C1C;
+}
+.pad[data-color="122"] {
+    background-color: #1AD000;
+}
+.pad[data-color="78"] {
+    background-color: #00A9FF;
+}
+.pad[data-color="106"] {
+    background-color: #A8000A;
+}
+.pad[data-color="123"] {
+    background-color: #074200;
+}
+.pad[data-color="79"] {
+    background-color: #002AFF;
+}
+.pad[data-color="107"] {
+    background-color: #DE513D;
+}
+.pad[data-color="124"] {
+    background-color: #B9B000;
+}
+.pad[data-color="80"] {
+    background-color: #3F00FF;
+}
+.pad[data-color="108"] {
+    background-color: #D86A1C;
+}
+.pad[data-color="125"] {
+    background-color: #3F3100;
+}
+.pad[data-color="81"] {
+    background-color: #7A00FF;
+}
+.pad[data-color="109"] {
+    background-color: #FFE126;
+}
+.pad[data-color="126"] {
+    background-color: #B35F00;
+}
+.pad[data-color="82"] {
+    background-color: #B21A7D;
+}
+.pad[data-color="110"] {
+    background-color: #9EE12F;
+}
+.pad[data-color="127"] {
+    background-color: #4B1502;
+}
+.pad[data-color="83"] {
+    background-color: #402100;
+}
+.pad[data-color="111"] {
+    background-color: #67B50F;
+}
+.pad[data-color="84"] {
+    background-color: #FF4A00;
+}
+.pad[data-color="112"] {
+    background-color: #1E1E30;
+}
+
+
+
+/* //Velocity to RGB Color Chart */
+/* //Color Velocity Color Velocity Color Velocity */
+/* #000000 0 #142B00 19 #004152 38 */
+/* #1E1E1E 1 #4CFF4C 20 #001019 39 */
+/* #7F7F7F 2 #00FF00 21 #4C88FF 40 */
+/* #FFFFFF 3 #005900 22 #0055FF 41 */
+/* #FF4C4C 4 #001900 23 #001D59 42 */
+/* #FF0000 5 #4CFF5E 24 #000819 43 */
+/* #590000 6 #00FF19 25 #4C4CFF 44 */
+/* #190000 7 #00590D 26 #0000FF 45 */
+/* #FFBD6C 8 #001902 27 #000059 46 */
+/* #FF5400 9 #4CFF88 28 #000019 47 */
+/* #591D00 10 #00FF55 29 #874CFF 48 */
+/* #271B00 11 #00591D 30 #5400FF 49 */
+/* #FFFF4C 12 #001F12 31 #190064 50 */
+/* #FFFF00 13 #4CFFB7 32 #0F0030 51 */
+/* #595900 14 #00FF99 33 #FF4CFF 52 */
+/* #191900 15 #005935 34 #FF00FF 53 */
+/* #88FF4C 16 #001912 35 #590059 54 */
+/* #54FF00 17 #4CC3FF 36 #190019 55 */
+/* #1D5900 18 #00A9FF 37 #FF4C87 56 */
+/* 5 */
+/* Color Velocity Color Velocity Color Velocity */
+/* #FF0054 57 #88E106 85 #DCFF6B 113 */
+/* #59001D 58 #72FF15 86 #80FFBD 114 */
+/* #220013 59 #00FF00 87 #9A99FF 115 */
+/* #FF1500 60 #3BFF26 88 #8E66FF 116 */
+/* #993500 61 #59FF71 89 #404040 117 */
+/* #795100 62 #38FFCC 90 #757575 118 */
+/* #436400 63 #5B8AFF 91 #E0FFFF 119 */
+/* #033900 64 #3151C6 92 #A00000 120 */
+/* #005735 65 #877FE9 93 #350000 121 */
+/* #00547F 66 #D31DFF 94 #1AD000 122 */
+/* #0000FF 67 #FF005D 95 #074200 123 */
+/* #00454F 68 #FF7F00 96 #B9B000 124 */
+/* #2500CC 69 #B9B000 97 #3F3100 125 */
+/* #7F7F7F 70 #90FF00 98 #B35F00 126 */
+/* #202020 71 #835D07 99 #4B1502 127 */
+/* #FF0000 72 #392b00 100 #404040 117 */
+/* #BDFF2D 73 #144C10 101 #757575 118 */
+/* #AFED06 74 #0D5038 102 #E0FFFF 119 */
+/* #64FF09 75 #15152A 103 #A00000 120 */
+/* #108B00 76 #16205A 104 #350000 121 */
+/* #00FF87 77 #693C1C 105 #1AD000 122 */
+/* #00A9FF 78 #A8000A 106 #074200 123 */
+/* #002AFF 79 #DE513D 107 #B9B000 124 */
+/* #3F00FF 80 #D86A1C 108 #3F3100 125 */
+/* #7A00FF 81 #FFE126 109 #B35F00 126 */
+/* #B21A7D 82 #9EE12F 110 #4B1502 127 */
+/* #402100 83 #67B50F 111 */
+/* #FF4A00 84 #1E1E30 112 */
