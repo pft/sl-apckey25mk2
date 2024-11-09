@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,15 +8,15 @@
     <style type="text/css">
       #grid {
         display: grid;
-        grid-template-columns: repeat(9, 80px);
-        grid-template-rows: repeat(6, 40px);
+        grid-template-columns: repeat(9, 120px);
+        grid-template-rows: repeat(6, 60px);
         gap: 4px;
       }
     </style>
     <script type="module">
       import {
         html,
-       render
+        render,
       } from "https://cdn.jsdelivr.net/npm/lit-html@3.2.1/lit-html.min.js";
       // Enable WebMidi.js and trigger the onEnabled() function when ready.
       WebMidi.enable()
@@ -25,16 +25,16 @@
 
       function onEnabled() {
         const output = WebMidi.getOutputByName(
-          "SooperLooperAkaiAPCKey25mk2Controller"
+          "SooperLooperAkaiAPCKey25mk2Controller",
         );
         document.addEventListener("mousedown", ({ target }) => {
           if (target.matches("[data-note]")) {
-              output.channels[1].playNote(Number(target.dataset["note"]))
+            output.channels[1].playNote(Number(target.dataset["note"]));
           }
         });
         document.addEventListener("mouseup", ({ target }) => {
           if (target.matches("[data-note]")) {
-              output.channels[1].stopNote(Number(target.dataset["note"]))
+            output.channels[1].stopNote(Number(target.dataset["note"]));
           }
         });
         // let output;
@@ -55,34 +55,76 @@
         const renderPads = (state) => {
           const arr = range(0, 40);
           const rows = range(0, 5).reverse();
-          const pads = rows.flatMap((r) =>
-            range(r * 8, r * 8 + 8).flatMap((pad) => {
-              const specs = state[pad] || [0x80, pad, 0x00];
-              return html`<button
-                class="pad ledmode--0x${specs[0].toString(
-                  16
-                )} color--${specs[2]}"
-                data-note=${pad}
-              ></button>`;
-            }).concat([html`<button data-note=${0x56 - r} class="softkey"></button>`])
-          ).concat([...range(0x40, 0x48), 0x51].map(note => html`<button data-note=${note} class="trackbtn"></button>`));
+          const pads = rows
+            .flatMap((r) =>
+              range(r * 8, r * 8 + 8)
+                .flatMap((pad) => {
+                  const specs = state[pad] || [0x80, pad, 0x00];
+                  return html`<button
+                    class="pad ledmode--0x${specs[0].toString(
+                      16,
+                    )} color--${specs[2]}"
+                    data-note=${pad}
+                  ></button>`;
+                })
+                .concat([
+                  html`<button
+                    data-color="25"
+                    data-note=${0x56 - r}
+                    class="softkey"
+                  ></button>`,
+                ]),
+            )
+            .concat(
+              [...range(0x40, 0x48), 0x51].map(
+                (note) =>
+                  html`<button data-note=${note} class="trackbtn"></button>`,
+              ),
+            );
           render(pads.flat(), document.getElementById("grid"));
         };
         const mySynth = WebMidi.getInputByName(
-          "SooperLooperAkaiAPCKey25mk2Controller"
+          "SooperLooperAkaiAPCKey25mk2Controller",
         );
 
-          let i = 0;
-          renderPads(state);
-          mySynth.addListener("noteon", (e) => {
-              const data = e.rawData;
-            state[e.data[1]] = e.rawData;
-
-              const pad = document.querySelector(`.pad[data-note="${data[1]}"]`);
-              pad.dataset['color'] = data[2];
-              pad.dataset['ledmode'] = `0x${data[0].toString(16)}`;
-              // renderPads(state);
-              // document.getElementById('log').innerHTML = `${e.note.name} ${e.channel} ${JSON.stringify(e.data)}`;
+        let i = 0;
+        renderPads(state);
+        mySynth.addListener("noteon", (e) => {
+          const data = e.rawData;
+          const [ev, note, value] = e.rawData;
+          state[note] = e.rawData;
+          const pad = document.querySelector(`*[data-note="${note}"]`);
+          if (pad === null) {
+            console.warn("no pad for ${note.toString(16)}");
+          }
+          if (note < 40) {
+            pad.dataset["color"] = value;
+            pad.dataset["ledmode"] = `0x${ev.toString(16)}`;
+          } else if (ev === 0x90) {
+            pad.dataset["color"] = value;
+            pad.dataset["ledmode"] = value === 2 ? "0x96" : "0x90";
+          } else {
+            delete pad.dataset.ledmode;
+          }
+          // renderPads(state);
+          // document.getElementById('log').innerHTML = `${e.note.name} ${e.channel} ${JSON.stringify(e.data)}`;
+        });
+        mySynth.addListener("noteoff", (e) => {
+          const data = e.rawData;
+          const [ev, note, value] = e.rawData;
+          state[note] = e.rawData;
+          const pad = document.querySelector(`*[data-note="${note}"]`);
+          if (pad === null) {
+            console.warn("no pad for ${note.toString(16)}");
+          }
+          if (note < 40) {
+            // pad.dataset["color"] = value;
+            // pad.dataset["ledmode"] = `0x${ev.toString(16)}`;
+          } else {
+            delete pad.dataset.ledmode;
+          }
+          // renderPads(state);
+          // document.getElementById('log').innerHTML = `${e.note.name} ${e.channel} ${JSON.stringify(e.data)}`;
         });
       }
     </script>
