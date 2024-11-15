@@ -19,8 +19,16 @@ class MyServer(ServerThread):
     def __init__(self, port=1234):
         ServerThread.__init__(self, port)
 
-    @make_method('/sessions', None)
-    def foo_callback(self, path, args):
+
+    @make_method('/loops', 'siss')
+    def loops_callback(self, path, args):
+        asker,port,session,address = args             #
+        onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f)) and f.startswith(session) and f.endswith('.wav')]
+        print(f"Received message '{path}' without argument {asker=} {port=} {address=} {onlyfiles=}")
+        send((asker, port), address, session, *onlyfiles)
+
+    @make_method('/sessions', 'sis')
+    def sessions_callback(self, path, args):
         asker,port,address = args             #
         onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f)) and f.endswith('.slsess')]
         print(f"Received message '{path}' without argument {asker=} {port=} {address=} {onlyfiles=}")
@@ -36,6 +44,6 @@ server.start()
 print(f"Server started in its own thread, send messages to {server.port}. Use CTRL-C to stop")
 
 while True:
-    send(("127.0.0.0", server.port), "/sessions", "127.0.0.1", 1234, "/sesions")
+##    send(("127.0.0.0", server.port), "/sessions", "127.0.0.1", 1234, "/sesions")
     # send(("127.0.0.0", server.port), "/unknown", (3, 4))
     time.sleep(1)
