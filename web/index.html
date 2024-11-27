@@ -8,7 +8,7 @@
     <style type="text/css">
       #grid {
         display: grid;
-        grid-template-columns: repeat(9, 120px);
+        grid-template-columns: repeat(10, 120px);
         grid-template-rows: repeat(6, 60px);
         gap: 4px;
       }
@@ -72,11 +72,11 @@
                     data-color="25"
                     data-note=${0x56 - r}
                     class="softkey"
-                  ></button>`,
+                  ></button><span></span>`,
                 ]),
             )
             .concat(
-              [...range(0x40, 0x48), 0x51].map(
+                [...range(0x40, 0x48), 0x51, 0x62].map(
                 (note) =>
                   html`<button data-note=${note} class="trackbtn"></button>`,
               ),

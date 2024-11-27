@@ -14,11 +14,11 @@
   width: 100%;
   text-align: center;
   left: 0;
-
   top: calc(100% + 5px);
+  text-transform: uppercase;
 }
 .softkey:after {
-  top: calc(100% - 5px);  
+  top: calc(100% - 5px);
 }
 .trackbtn:before,
 .softkey:before {
@@ -65,7 +65,7 @@
   content: "▶";
 }
 [data-note="68"]:after {
-  content: "vol";
+  content: "volume";
 }
 [data-note="69"]:after {
   content: "pan";
@@ -82,7 +82,7 @@
 
 
 [data-note="82"]:after {
-  content: "stop clips";
+  content: "clip stop";
 }
 [data-note="83"]:after {
   content: "solo";
@@ -95,6 +95,13 @@
 }
 [data-note="86"]:after {
   content: "select";
+}
+[data-note="98"]:before {
+    justify-self: stretch;
+    width: 64px;
+}
+[data-note="98"]:after {
+  content: "shift";
 }
 
 
