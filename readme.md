@@ -67,6 +67,8 @@ Clip stop, Rec Arm, and Select are still free.
 Shift plus the Up or Down key shifts the loops, as long as there are
 some. During Shift press, you'll see a number indicating the top loop.
 
+![shifting the loops](https://github.com/user-attachments/assets/19b98756-5793-4c90-854d-6602b370aa8b)
+
 `[◀]` and `[▶]`:
 
 The left and right arrows + a pad in the same column perform Undo and Redo on a loop.
@@ -129,7 +131,13 @@ You can use the pads, and knobs 2-6 will control the levels of each column.
 
 ## Pan mode
 
-@todo
+Invoke by pressing `[Pan]` button once. The `[Pan]` button will light up red.
+
+The pan settings for each displayed loop is shown. Stereo loops show the left channel as red, the right one as blue.
+
+Mono loops show the setting simply in a brighter color of the current state.
+
+Panning cannot (yet) be edited via buttons, use the Knobs for that.
 
 ## Sync/Quantize mode
 
