@@ -1,5 +1,36 @@
+#grid {
+  display: grid;
+  grid-template-columns: repeat(10, 120px);
+  grid-template-rows: repeat(6, 60px);
+  gap: 4px;
+}
+#grid[data-mode="sync"] .pad[data-note="30"]:before  {
+    content: '8th ▼'
+}
+#grid[data-mode="sync"] .pad[data-note="31"]:before  {
+    content: '8th ▲'
+}
+#grid[data-mode="sync"] .pad[data-note="38"]:before  {
+    content: 'Sync source'
+}
+#grid[data-mode="sync"] .pad[data-note="39"]:before  {
+    content: 'Sync to'
+}
+
 /* //Velocity to RGB Color Chart */
 /* //Color Velocity Color Velocity Color Velocity */
+.coldesig {
+  justify-self: center;
+  align-self: end;
+  font-family: monospace;
+  text-align: center;
+}
+#grid[mode="1"] .coldesig:before {
+  content: 'Rec/Overdub';
+}
+.trackbtn {
+    margin-bottom: 36px;
+}
 .trackbtn,
 .softkey {
   position: relative;
@@ -37,7 +68,7 @@
   background: #00ff19;
 }
 .softkey[data-ledmode="0x96"] {
-    opacity: 0.1;
+  opacity: 0.1;
   animation: blink-animation 0.5s steps(5, start) infinite;
   -webkit-animation: blink-animation 0.5s steps(5, start) infinite;
 }
@@ -80,7 +111,6 @@
   content: "stop all clips";
 }
 
-
 [data-note="82"]:after {
   content: "clip stop";
 }
@@ -97,18 +127,17 @@
   content: "select";
 }
 [data-note="98"]:before {
-    justify-self: stretch;
-    width: 64px;
+  justify-self: stretch;
+  width: 64px;
 }
 [data-note="98"]:after {
   content: "shift";
 }
 
-
-
 .pad {
   /* transition: background-color 32ms; */
   border-radius: 2px;
+  font-family: monospace;
 }
 .pad:focus,
 .pad:hover {

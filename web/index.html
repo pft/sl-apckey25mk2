@@ -1,138 +1,97 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <title>Akai APC Key 25 Dummy</title>
     <script src="https://cdn.jsdelivr.net/npm/webmidi@latest/dist/iife/webmidi.iife.js"></script>
-    <link rel="Stylesheet" type="text/css" href="../lib/colors.css" />
-    <style type="text/css">
-      #grid {
-        display: grid;
-        grid-template-columns: repeat(10, 120px);
-        grid-template-rows: repeat(6, 60px);
-        gap: 4px;
-      }
-    </style>
-    <script type="module">
-      import {
-        html,
-        render,
-      } from "https://cdn.jsdelivr.net/npm/lit-html@3.2.1/lit-html.min.js";
-      // Enable WebMidi.js and trigger the onEnabled() function when ready.
-      WebMidi.enable()
-        .then(onEnabled)
-        .catch((err) => alert(err));
-
-      function onEnabled() {
-        const output = WebMidi.getOutputByName(
-          "SooperLooperAkaiAPCKey25mk2Controller",
-        );
-        document.addEventListener("mousedown", ({ target }) => {
-          if (target.matches("[data-note]")) {
-            output.channels[1].playNote(Number(target.dataset["note"]));
-          }
-        });
-        document.addEventListener("mouseup", ({ target }) => {
-          if (target.matches("[data-note]")) {
-            output.channels[1].stopNote(Number(target.dataset["note"]));
-          }
-        });
-        // let output;
-        // WebMidi.outputs.forEach((device, index) => {
-        //     if (device.name === 'SooperLooperAkaiAPCKey25mk2Controller') {
-        //     output = device;
-        //     }
-        //     document.body.innerHTML+= `${index}: ${device.name}<br>`;
-        // })
-        const state = {};
-        const range = (from, to) => {
-          let arr = [];
-          for (let i = 0, val = from; val < to; val++, i++) {
-            arr[i] = val;
-          }
-          return arr;
-        };
-        const renderPads = (state) => {
-          const arr = range(0, 40);
-          const rows = range(0, 5).reverse();
-          const pads = rows
-            .flatMap((r) =>
-              range(r * 8, r * 8 + 8)
-                .flatMap((pad) => {
-                  const specs = state[pad] || [0x80, pad, 0x00];
-                  return html`<button
-                    class="pad ledmode--0x${specs[0].toString(
-                      16,
-                    )} color--${specs[2]}"
-                    data-note=${pad}
-                  ></button>`;
-                })
-                .concat([
-                  html`<button
-                    data-color="25"
-                    data-note=${0x56 - r}
-                    class="softkey"
-                  ></button><span></span>`,
-                ]),
-            )
-            .concat(
-                [...range(0x40, 0x48), 0x51, 0x62].map(
-                (note) =>
-                  html`<button data-note=${note} class="trackbtn"></button>`,
-              ),
-            );
-          render(pads.flat(), document.getElementById("grid"));
-        };
-        const mySynth = WebMidi.getInputByName(
-          "SooperLooperAkaiAPCKey25mk2Controller",
-        );
-
-        let i = 0;
-        renderPads(state);
-        mySynth.addListener("noteon", (e) => {
-          const data = e.rawData;
-          const [ev, note, value] = e.rawData;
-          state[note] = e.rawData;
-          const pad = document.querySelector(`*[data-note="${note}"]`);
-          if (pad === null) {
-            console.warn("no pad for ${note.toString(16)}");
-          }
-          if (note < 40) {
-            pad.dataset["color"] = value;
-            pad.dataset["ledmode"] = `0x${ev.toString(16)}`;
-          } else if (ev === 0x90) {
-            pad.dataset["color"] = value;
-            pad.dataset["ledmode"] = value === 2 ? "0x96" : "0x90";
-          } else {
-            delete pad.dataset.ledmode;
-          }
-          // renderPads(state);
-          // document.getElementById('log').innerHTML = `${e.note.name} ${e.channel} ${JSON.stringify(e.data)}`;
-        });
-        mySynth.addListener("noteoff", (e) => {
-          const data = e.rawData;
-          const [ev, note, value] = e.rawData;
-          state[note] = e.rawData;
-          const pad = document.querySelector(`*[data-note="${note}"]`);
-          if (pad === null) {
-            console.warn("no pad for ${note.toString(16)}");
-          }
-          if (note < 40) {
-            // pad.dataset["color"] = value;
-            // pad.dataset["ledmode"] = `0x${ev.toString(16)}`;
-          } else {
-            delete pad.dataset.ledmode;
-          }
-          // renderPads(state);
-          // document.getElementById('log').innerHTML = `${e.note.name} ${e.channel} ${JSON.stringify(e.data)}`;
-        });
-      }
-    </script>
+    <link rel="Stylesheet" type="text/css" href="./style.css" />
+    <script src="./index.js"></script>
   </head>
-
   <body>
     <h1>APC Key25 Dummy</h1>
     <div id="log"></div>
-    <div id="grid"></div>
+    <div id="grid" data-mode="loop">
+      <span class="coldesig" data-column="0"></span
+      ><span class="coldesig" data-column="1"></span
+      ><span class="coldesig" data-column="2"></span
+      ><span class="coldesig" data-column="3"></span
+      ><span class="coldesig" data-column="4"></span
+      ><span class="coldesig" data-column="5"></span
+      ><span class="coldesig" data-column="6"></span
+      ><span class="coldesig" data-column="7"></span
+      ><span class="coldesig" data-column="8"></span
+      ><span class="coldesig" data-column="9"></span
+      ><button class="pad ledmode--0x80 color--0" data-note="32"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="33"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="34"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="35"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="36"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="37"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="38"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="39"></button
+      ><button data-color="25" class="softkey" data-note="82"></button
+      ><span></span
+      ><button class="pad ledmode--0x80 color--0" data-note="24"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="25"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="26"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="27"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="28"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="29"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="30"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="31"></button
+      ><button data-color="25" class="softkey" data-note="83"></button
+      ><span></span
+      ><button class="pad ledmode--0x80 color--0" data-note="16"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="17"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="18"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="19"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="20"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="21"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="22"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="23"></button
+      ><button data-color="25" class="softkey" data-note="84"></button
+      ><span></span
+      ><button class="pad ledmode--0x80 color--0" data-note="8"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="9"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="10"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="11"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="12"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="13"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="14"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="15"></button
+      ><button data-color="25" class="softkey" data-note="85"></button
+      ><span></span
+      ><button class="pad ledmode--0x80 color--0" data-note="0"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="1"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="2"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="3"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="4"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="5"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="6"></button
+      ><button class="pad ledmode--0x80 color--0" data-note="7"></button
+      ><button data-color="25" class="softkey" data-note="86"></button
+      ><span></span><button class="trackbtn" data-note="64"></button
+      ><button class="trackbtn" data-note="65"></button
+      ><button class="trackbtn" data-note="66"></button
+      ><button class="trackbtn" data-note="67"></button
+      ><button class="trackbtn" data-note="68"></button
+      ><button class="trackbtn" data-note="69"></button
+      ><button class="trackbtn" data-note="70"></button
+      ><button class="trackbtn" data-note="71"></button
+      ><button class="trackbtn" data-note="81"></button
+      ><button class="trackbtn" data-note="98"></button>
+    </div>
+    <label>
+      <span>Mode: </span>
+      <select name="mode">
+        <option value="loop">Device 1: loop</option>
+        <option value="save">Device 2: save</option>
+        <option value="load">Device 3: load</option>
+        <option value="levels-1">Volume 1: levels</option>
+        <option value="levels-2">Volume 2: loop levels</option>
+        <option value="pan">Pan</option>
+        <option value="sync">Sync/quantize</option>
+      </select>
+    </label>
   </body>
 </html>
