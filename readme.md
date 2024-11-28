@@ -24,6 +24,8 @@ Then there are two Levels modes, one Pan mode, one Sync/Quantize mode.
 
 This is the basic, default, mode we start with.
 
+![image](https://github.com/user-attachments/assets/e6572158-7ece-4728-b876-0dd534a4c04b)
+
 The 8×5 grid of RGB Leds control looping commands and reflect the current state of a loop.
 
 The first row shows the commands for all the tracks.
