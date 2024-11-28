@@ -123,6 +123,8 @@ Invoke by pressing `[Volume]` button once. The `[Volume]` button will light up r
 
 You can use the pads to adjust volume levels.
 
+![image](https://github.com/user-attachments/assets/0a1ee7b7-b953-4ce3-9d74-3f765bf6a5f6)
+
 ## Levels mode 2: 6 levels for selected loop
 
 Invoke by pressing `[Volume]` button twice. The `[Volume]` button will pulsate red.
@@ -130,6 +132,8 @@ Invoke by pressing `[Volume]` button twice. The `[Volume]` button will pulsate r
 Peak meter (red) - Record Threshold (red) - Input Gain (lime) - Wet (blue - think water) - Dry (dark grey) - Feedback (purple)
 
 You can use the pads, and knobs 2-6 will control the levels of each column.
+
+![apc-levels](https://github.com/user-attachments/assets/23fea30b-70d8-4055-8505-2d6b960cbaa3)
 
 ## Pan mode
 
@@ -141,6 +145,11 @@ Mono loops show the setting simply in a brighter color of the current state.
 
 Panning cannot (yet) be edited via buttons, use the Knobs for that.
 
+![image](https://github.com/user-attachments/assets/d8f34e60-0202-4365-8116-5fd24e138542)
+
 ## Sync/Quantize mode
+
+![image](https://github.com/user-attachments/assets/54a12d32-2283-4331-a9b1-1317e7498563)
+
 
 @todo
