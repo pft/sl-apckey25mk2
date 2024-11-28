@@ -64,10 +64,19 @@
 
 .softkey:before {
 }
-.softkey[data-ledmode="0x96"]:before {
+.softkey[data-ledmode]:before {
   background: #00ff19;
 }
-.softkey[data-ledmode="0x96"] {
+.trackbtn[data-ledmode]:before {
+  background: #ff0000;
+}
+.softkey[data-ledmode="blink"] {
+  opacity: 0.1;
+  animation: blink-animation 0.5s steps(5, start) infinite;
+  -webkit-animation: blink-animation 0.5s steps(5, start) infinite;
+}
+.softkey[data-ledmode="blink"],
+.trackbtn[data-ledmode="blink"] {
   opacity: 0.1;
   animation: blink-animation 0.5s steps(5, start) infinite;
   -webkit-animation: blink-animation 0.5s steps(5, start) infinite;

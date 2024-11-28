@@ -50,8 +50,7 @@ function onEnabled() {
       pad.dataset["color"] = value;
       pad.dataset["ledmode"] = `0x${ev.toString(16)}`;
     } else if (ev === 0x90) {
-      pad.dataset["color"] = value;
-      pad.dataset["ledmode"] = value === 2 ? "0x96" : "0x90";
+      pad.dataset["ledmode"] = value === 2 ? "blink" : "continuous";
     } else {
       delete pad.dataset.ledmode;
     }
