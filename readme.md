@@ -71,6 +71,12 @@ some. During Shift press, you'll see a number indicating the top loop.
 
 ![shifting the loops](https://github.com/user-attachments/assets/19b98756-5793-4c90-854d-6602b370aa8b)
 
+`[Shift + <a row's soft key>]`: 
+
+Sets the selected loop in SooperLooper. The selected loop is what is used in Level mode 2, and also often a target of other controllers (such as a single pedal).
+
+The softkey of the selected loop will be lit green. When the mode is active targeting the selected loop, such as Levels Mode 2, the softkey will pulsate in green.
+
 `[◀]` and `[▶]`:
 
 The left and right arrows + a pad in the same column perform Undo and Redo on a loop.
@@ -127,7 +133,7 @@ You can use the pads to adjust volume levels.
 
 ## Levels mode 2: 6 levels for selected loop
 
-Invoke by pressing `[Volume]` button twice. The `[Volume]` button will pulsate red.
+Invoke by pressing `[Volume]` button twice. Both the `[Volume]` button and the softkey next to the selected loop will pulsate red.
 
 Peak meter (red) - Record Threshold (red) - Input Gain (lime) - Wet (blue - think water) - Dry (dark grey) - Feedback (purple)
 
