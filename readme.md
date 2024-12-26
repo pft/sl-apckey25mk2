@@ -58,7 +58,11 @@ Solo + any loop pad (toggle-)soloes that loop.
 
 Mute + any loop pad toggles whether that loop is muted.
 
-Mute + the top row should toggles muteness of all loops. Maybe we should just mute them instead.
+Mute + the top row toggles muteness of all loops.
+
+Stop all clips mutes all clips.
+
+Shift+Stop all clips unmutes all clips.
 
 Clip stop, Rec Arm, and Select are still free.
 
