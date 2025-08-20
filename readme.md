@@ -85,7 +85,7 @@ Solo + any loop pad (toggle-)soloes that loop.
 
 Mute + any loop pad toggles whether that loop is muted.
 
-Mute + the top row toggles muteness of all loops.
+Mute + the top row toggles muteness of all loops (not on Zynthian).
 
 Stop all clips mutes all clips.
 
