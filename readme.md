@@ -42,7 +42,7 @@ This is the basic, default, mode we start with. If this mode is one, none of the
 
 The 8×5 grid of RGB Leds control looping commands and reflect the current state of a loop.
 
-The first row shows the commands for all the tracks.
+The first row shows the column commands for all the tracks.
 
 The commands are:
 
@@ -71,6 +71,14 @@ The brightness of a loop row indicates the playing position in the loop.
 
 When a loop is blinking quickly, it is waiting, e.g. to record.
 
+### Groups (Zynthian only)
+
+The first 5 'global' pads contain five groups. You can use them for
+grouping loops used for chorus/verse/bridge etc.
+
+If loops are assigned to a group pad pressing that group pad will
+unmute its loops and mute all other loops.
+
 ### Soft keys
 
 Solo + any loop pad (toggle-)soloes that loop.
@@ -83,13 +91,18 @@ Stop all clips mutes all clips.
 
 Shift+Stop all clips unmutes all clips.
 
-Clip stop, Rec Arm, and Select are still free.
+Clip stop and Rec Arm are still free.
+
+(Zynthian only:) Select toggles the group assign mode. When this is active,
+press one of the five group pads and select which loops it
+contains. NOTE: groups are not saved, nor restored, with sessions or
+in a snapshot. They are ephemeral and act globally.
 
 ### Track buttons
 
 `[Shift + ▲]` and `[Shift + ▼]`:
 
-Shift plus the Up or Down key shifts the loops, as long as there are
+Shift plus the Up or Down key shifts the loops in view, as long as there are
 some. During Shift press, you'll see a number indicating the top loop.
 
 ![shifting the loops](https://github.com/user-attachments/assets/19b98756-5793-4c90-854d-6602b370aa8b)
@@ -104,9 +117,13 @@ The softkey of the selected loop will be lit green. When the mode is active targ
 
 The left and right arrows + a pad in the same column perform Undo and Redo on a loop.
 
-Pressing the left arrow + a pad in a column to the left of its column performs Undo All.
+Pressing the left arrow + a pad in a column to the left of its column performs Undo All on a loop.
 
-Pressing the right arrow + a pad in a column to the right of its column performs Redo All.
+Pressing the right arrow + a pad in a column to the right of its column performs Redo All on a loop.
+
+I found this to be quite intuitive: undo/redo to the extreme.
+
+`[◀]` plus the 'global record' on the top left this way acts as a nice shortcut to clear all loops.
 
 ### Knobs
 
@@ -168,5 +185,26 @@ Panning cannot (yet) be edited via buttons, use the Knobs for that.
 
 ![image](https://github.com/user-attachments/assets/54a12d32-2283-4331-a9b1-1317e7498563)
 
+The first 6 pads in the top row toggle sync/relative sync/playback
+sync/mute quant/overdub quant/replace quant for all loops.
 
-@todo
+The pads in the columns below toggle it on individual loops.
+
+Shifting loops is possible as in the default.
+
+The 7th pad in the top row cycle through Sync source (off, loop1 (blue) -- last loop (all dark blue), internal (white), MIDI (orange), Jack (red)).
+
+The (newly) selected function/loop # is indicated in the grid.
+
+The 8th pad in the top row cycle through Sync to (off, MIDI(orange), 8th(brown), cycle(blue)).
+
+The two light brown pads below the top row increase/decrease the
+number of 8th within a cycle. Press both at same time to view but not change.
+
+While one of those is pressed, number of 8ths is indicated as brown
+pads filling up from the left bottom. Pressing ANY pad sets it to that
+number of 8ths. This allows for easy setting of e.g. 4/8 or 2/8, so
+that you easily create smaller loops than the one synced to, yet still
+be in time. Their own placement--at 23/8 and 31/8--is large prime enough not
+likely to pose a problem.
+
