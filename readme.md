@@ -12,17 +12,31 @@ python lib/sessions.py <sessiondir>
 
 # Usage
 
-There are three main Device Modes. The `Device` button cycles between them:
+The device starts in the Looper Mode.
 
-1. Looper mode
-2. Session save mode
-3. Session/loop(@todo) load mode
+Besides that, there are two Levels modes, one Pan mode, one Sync/Quantize mode, and two Session modes
 
-Then there are two Levels modes, one Pan mode, one Sync/Quantize mode.
+The present mode is indicated by the four buttons Volume, Pan, Send and Device.
 
-## Device mode 1: Looper mode
+`[Volume]`:
 
-This is the basic, default, mode we start with.
+Cycles through the two Levels modes.
+
+`[Pan]`:
+
+Opens the Pan mode
+
+`[Send]`:
+
+Opens the Sync/Quantize mode.
+
+`[Device]`:
+
+Cycles through the two Session Modes.
+
+## Looper mode
+
+This is the basic, default, mode we start with. If this mode is one, none of the fout indicators is lit.
 
 ![image](https://github.com/user-attachments/assets/e6572158-7ece-4728-b876-0dd534a4c04b)
 
@@ -34,23 +48,28 @@ The commands are:
 
 `[Rec/Overdub (red)]` `[Multiply (amber)]` `[Insert (warm pink)]` `[Replace (pink light]` `[Substitute (pink)]` `[Oneshot (light green)]` `[Trigger (green)]` `[Pause (lime)]`.
 
-Rec will change to overdub on non-empty loops.
+Record will change to overdub on non-empty loops.
 
 The following four rows initially show the first four loops.
 
 Their pads do the same as the all-loop pads in the same position.
 
-For the Rec/Overdub button, holding the Up button while pressing
-Rec/Overdub will reverse the action. I.e. force record when overdub
-would be the normal action. Or go straight into overdub from
-recording. The Rec/Overdub button in the 'All row' **always** invokes
-record_or_overdub, i.e. do the safe thing.
+For the Rec/Overdub pad, holding the Up (▲) pad while pressing a
+Rec/Overdub pad will reverse the action. This means it forcing record
+when overdub would be the normal action. You can also use this to go
+straight into overdub from recording. The Rec/Overdub button in the
+'All row' **always** invokes native record\_or\_overdub.
 
-When a pad's function is active, the entire row will have that color.
+On the Zynthian driver, pressing one of these pads and holding it for
+more than 1 second will make that pad function as a momentary
+toggle. @todo: implement this here too.
 
-The brightness of a loop row indicates the playing position in the the loop.
+When a pad's function is active, the entire row will have that
+color. Overdub being purple.
 
-When a loop is pulsating, it is waiting, e.g. to record.
+The brightness of a loop row indicates the playing position in the loop.
+
+When a loop is blinking quickly, it is waiting, e.g. to record.
 
 ### Soft keys
 
@@ -75,7 +94,7 @@ some. During Shift press, you'll see a number indicating the top loop.
 
 ![shifting the loops](https://github.com/user-attachments/assets/19b98756-5793-4c90-854d-6602b370aa8b)
 
-`[Shift + <a row's soft key>]`: 
+`[Shift + <a row's soft key>]`:
 
 Sets the selected loop in SooperLooper. The selected loop is what is used in Level mode 2, and also often a target of other controllers (such as a single pedal).
 
@@ -89,29 +108,13 @@ Pressing the left arrow + a pad in a column to the left of its column performs U
 
 Pressing the right arrow + a pad in a column to the right of its column performs Redo All.
 
-`[Volume]`:
-
-Cycles through the two Levels modes.
-
-`[Pan]`:
-
-Opens the Pan mode
-
-`[Send]`:
-
-Opens the Sync/Quantize mode.
-
-`[Device]`:
-
-Cycles through the three Device Modes.
-
 ### Knobs
 
 The (top) Knobs 1-4 control the wet signal (volume level) for the 4 displayed loops.
 
 The (bottom) Knobs 5-8 control the pan of the 4 displayed loops.
 
-## Device mode 2: Session save mode
+## Session mode 1: session save mode
 
 Pressing a pad saves the current session to one of the 40 locations.
 
@@ -121,11 +124,15 @@ The session path is `"/zynthian/zynthian-my-data/presets/sooperlooper/"` by defa
 
 Run `python lib/sessions.py <sessiondir>` to get feedback on which pads have storage.
 
-## Device mode 3: Session load mode
+The last recorded or loaded session by the driver during the current session is indicated by a blinking pad.
+
+## Session mode 2: Session load mode
 
 Pressing a pad loads a session stored under that pad.
 
 Invoke by pressing `[Device]` twice. The `[Device]` button will light pulsate red.
+
+The last recorded or loaded session by the driver during the current session is indicated by a blinking pad.
 
 ## Levels mode 1: volume (wet) levels for all displayed loops
 
