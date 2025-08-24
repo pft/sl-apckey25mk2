@@ -42,6 +42,12 @@ This is the basic, default, mode we start with. If this mode is one, none of the
 
 The 8×5 grid of RGB Leds control looping commands and reflect the current state of a loop.
 
+Adding a loop: press the leftmost pad on an empty loop row to add a
+mono loop, press the second pad to add a stereo loop. 3rd for three
+channels, 4th for four.
+
+Remove the last loop by pressing any of pad 5-8 on an empty loop.
+
 The first row shows the column commands for all the tracks.
 
 The commands are:
@@ -57,7 +63,7 @@ Their pads do the same as the all-loop pads in the same position.
 For the Rec/Overdub pad, holding the Up (▲) pad while pressing a
 Rec/Overdub pad will reverse the action. This means it forcing record
 when overdub would be the normal action. You can also use this to go
-straight into overdub from recording. The Rec/Overdub button in the
+straight into overdub from recording. The Rec/Overdub button in the 
 'All row' **always** invokes native record\_or\_overdub.
 
 On the Zynthian driver, pressing one of these pads and holding it for
@@ -85,7 +91,7 @@ Solo + any loop pad (toggle-)soloes that loop.
 
 Mute + any loop pad toggles whether that loop is muted.
 
-Mute + the top row toggles muteness of all loops (not on Zynthian).
+Mute + the top row **toggles** muteness of all loops.
 
 Stop all clips mutes all clips.
 
@@ -124,6 +130,16 @@ Pressing the right arrow + a pad in a column to the right of its column performs
 I found this to be quite intuitive: undo/redo to the extreme.
 
 `[◀]` plus the 'global record' on the top left this way acts as a nice shortcut to clear all loops.
+
+#### ALT mode (Zynthian only)
+
+Pressing the first track button momentarily enters alt mode (not to be confused with Zynthian v5 mode). 
+
+While in alt mode, the third button in a loop functions as Reverse.
+
+And the fourth button in a loop functions as the Delay Trigger. This
+is a very confusing functionality, and I myself do not yet understand
+how to work it and get out of it. 
 
 ### Knobs
 
